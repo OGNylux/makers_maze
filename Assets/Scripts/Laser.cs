@@ -5,13 +5,15 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int maxBounces = 10;
+    private readonly int maxBounces = 10;
     private int count;
     private LineRenderer lineRenderer;
     [SerializeField]
     private Transform startPoint;
     [SerializeField]
     private bool reflectOnlyMirror;
+    [SerializeField]
+    private GameObject previousSensor;
 
     void Start()
     {
@@ -32,25 +34,33 @@ public class Laser : MonoBehaviour
 
         for (int i = 0; i < maxBounces; i++)
         {
-            Ray ray = new Ray(position, direction);
-            RaycastHit hit;
+            Ray ray = new(position, direction);
 
-            if (count < maxBounces-1)
+            if (count < maxBounces - 1)
             {
                 count++;
             }
 
-            if (Physics.Raycast(ray, out hit, 300))
+            if (Physics.Raycast(ray, out RaycastHit hit, 300))
             {
                 position = hit.point;
                 direction = Vector3.Reflect(direction, hit.normal);
                 lineRenderer.SetPosition(count, hit.point);
 
-                if (hit.transform.tag != "Mirror" && reflectOnlyMirror) 
+                if (!hit.transform.CompareTag("Mirror") && reflectOnlyMirror) 
                 { 
                     for (int j = (i+1); j <= maxBounces; j++) 
                     {
                         lineRenderer.SetPosition(j, hit.point);
+                        if (hit.transform.CompareTag("Sensor"))
+                        {
+                            if (previousSensor != null && hit.transform.gameObject != previousSensor)
+                            {
+                                previousSensor.GetComponent<SensorChangeMaterial>().active = false;
+                            }
+                            previousSensor = hit.transform.gameObject;
+                            hit.transform.gameObject.GetComponent<SensorChangeMaterial>().active = true;
+                        }
                     }
                     break;
                 }
@@ -61,6 +71,11 @@ public class Laser : MonoBehaviour
             }
             else
             {
+                if (previousSensor != null)
+                {
+                    previousSensor.GetComponent<SensorChangeMaterial>().active = false;
+                    previousSensor = null;
+                }
                 lineRenderer.SetPosition(count, ray.GetPoint(300));
             }
         }
