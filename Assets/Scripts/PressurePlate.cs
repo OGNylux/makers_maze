@@ -16,16 +16,41 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     bool allowAllGameObjects;
     [SerializeField]
-    bool isOpen;
+    bool stayActivated;
+
+    int items;
 
     private void OnTriggerEnter(Collider other)
     {
-        Sensor.GetComponent<SensorChangeMaterial>().active = true;
-        isOpen = true;
+        if (ShouldIncrement(other))
+        {
+            items++;
+            Sensor.GetComponent<SensorChangeMaterial>().active = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        if (!stayActivated && ShouldIncrement(other))
+        {
+            items--;
+            if (items == 0)
+            {
+                Sensor.GetComponent<SensorChangeMaterial>().active = false;
+            }
+        }
+    }
+
+    private bool ShouldIncrement(Collider other)
+    {
+        if (allowAllGameObjects) return true;
+        if (allowPlayers && other.CompareTag("Player")) return true;
+        if (other.TryGetComponent<CustomTags>(out var customTags))
+        {
+            if (allowAllFilaments && customTags.HasTag("Filament")) return true;
+            if (allowHeavyFilament && customTags.HasTag("Heavy")) return true;
+        }
+
+        return false;
     }
 }
