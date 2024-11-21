@@ -25,9 +25,10 @@ public class PrintLogic : MonoBehaviour
 
     private IEnumerator DelayedCreateObject(float delay)
     {
-        yield return new WaitForSeconds(delay); // Warte für die angegebene Zeit
-        GameObject newPrintObject = Instantiate(prints[printID]); // Objekt erstellen
-        newPrintObject.transform.localScale = transform.localScale; // Skalierung übernehmen
+        yield return new WaitForSeconds(delay); // Wait for delay
+        GameObject newPrintObject = Instantiate(prints[printID]); // Create new object
+        newPrintObject.transform.localScale = transform.localScale; // Set scale
+        newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
     }
 
     public void allObjectsInactive()
