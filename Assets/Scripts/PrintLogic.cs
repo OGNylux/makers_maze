@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class PrintLogic : MonoBehaviour
 {
     public int printID = 0;
     public GameObject[] prints;
+    public bool test = false;
 
     public void setPrintID(int printID)
     {
@@ -34,5 +36,20 @@ public class PrintLogic : MonoBehaviour
     public void allObjectsInactive()
     {
         GetComponentsInChildren<GameObject>(false);
+    }
+
+    public void specificObjectActive(int index)
+    {
+        GetComponentsInChildren<GameObject>(false);
+        transform.GetChild(index).gameObject.SetActive(true);
+        test = true;
+        Console.WriteLine("test");
+
+    }
+
+    public void testfunc()
+    {
+        test = true;
+        Console.WriteLine("test");
     }
 }
