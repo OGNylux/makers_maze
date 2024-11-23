@@ -14,14 +14,21 @@ public class PrintLogic : MonoBehaviour
 
     public void Scale(float scaleX)
     {
-        transform.localScale = new Vector3(scaleX,scaleX, scaleX);
+        transform.localScale = new Vector3(scaleX, scaleX, scaleX);
     }
 
-    //Print Objects
-    public void createObject()
+    // Print Objects with a delay
+    public void createObjectWithDelay(float delay)
     {
-        GameObject newPrintObject = Instantiate(prints[printID]);
-        newPrintObject.transform.localScale = transform.localScale;
+        StartCoroutine(DelayedCreateObject(delay));
+    }
+
+    private IEnumerator DelayedCreateObject(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for delay
+        GameObject newPrintObject = Instantiate(prints[printID]); // Create new object
+        newPrintObject.transform.localScale = transform.localScale; // Set scale
+        newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
     }
 
     public void allObjectsInactive()
