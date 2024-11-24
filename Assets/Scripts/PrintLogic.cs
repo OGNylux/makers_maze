@@ -7,16 +7,26 @@ public class PrintLogic : MonoBehaviour
 {
     public int printID = 0;
     public GameObject[] prints;
-    public bool test = false;
+    public int debug = 0;
 
     public void setPrintID(int printID)
     {
         this.printID = printID;
     }
 
-    public void Scale(float scaleX)
+    public void ScaleX(float scaleX)
     {
-        transform.localScale = new Vector3(scaleX, scaleX, scaleX);
+        transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+    }
+
+    public void ScaleY(float scaleY)
+    {
+        transform.localScale = new Vector3(transform.localScale.x, scaleY, transform.localScale.z);
+    }
+
+    public void ScaleZ(float scaleZ) 
+    {
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, scaleZ);
     }
 
     // Print Objects with a delay
@@ -40,16 +50,12 @@ public class PrintLogic : MonoBehaviour
 
     public void specificObjectActive(int index)
     {
-        GetComponentsInChildren<GameObject>(false);
-        transform.GetChild(index).gameObject.SetActive(true);
-        test = true;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+        transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().enabled = true;
         Console.WriteLine("test");
 
-    }
-
-    public void testfunc()
-    {
-        test = true;
-        Console.WriteLine("test");
     }
 }

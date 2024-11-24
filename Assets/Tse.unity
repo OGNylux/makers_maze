@@ -1018,7 +1018,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a63c5d5aa9c5e464bb100b703d130d49, type: 2}
+  - {fileID: 2100000, guid: 06e5254b9af529747a8269a16f1953a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1770,7 +1770,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2179,18 +2179,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PrintLogic, Assembly-CSharp
         m_MethodName: setPrintID
         m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2052624954}
-        m_TargetAssemblyTypeName: PrintLogic, Assembly-CSharp
-        m_MethodName: testfunc
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3770,7 +3758,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4571,7 +4559,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a63c5d5aa9c5e464bb100b703d130d49, type: 2}
+  - {fileID: 2100000, guid: 06e5254b9af529747a8269a16f1953a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5126,7 +5114,7 @@ MonoBehaviour:
   - {fileID: 6792430312155038069, guid: d554e7a87641da04daeff77caadcfc3f, type: 3}
   - {fileID: 743692251134847743, guid: 5ec0dfcf4a3fbe24eb0f607f0afe0911, type: 3}
   - {fileID: 7680142987451773558, guid: 9b27231075e936b4980906243ea638b8, type: 3}
-  test: 0
+  debug: 0
 --- !u!1 &2086361873
 GameObject:
   m_ObjectHideFlags: 0
@@ -5522,7 +5510,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a63c5d5aa9c5e464bb100b703d130d49, type: 2}
+  - {fileID: 2100000, guid: 06e5254b9af529747a8269a16f1953a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
