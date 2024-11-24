@@ -6,12 +6,18 @@ using UnityEngine;
 public class PrintLogic : MonoBehaviour
 {
     public int printID = 0;
+    public int filamentID = 0;
     public GameObject[] prints;
-    public int debug = 0;
+    private int shapesNum = 3;
 
     public void setPrintID(int printID)
     {
         this.printID = printID;
+    }
+
+    public void setFilamentID(int filamentID)
+    {
+        this.filamentID = filamentID;
     }
 
     public void ScaleX(float scaleX)
@@ -38,14 +44,9 @@ public class PrintLogic : MonoBehaviour
     private IEnumerator DelayedCreateObject(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for delay
-        GameObject newPrintObject = Instantiate(prints[printID]); // Create new object
+        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID]); // Create new object
         newPrintObject.transform.localScale = transform.localScale; // Set scale
         newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
-    }
-
-    public void allObjectsInactive()
-    {
-        GetComponentsInChildren<GameObject>(false);
     }
 
     public void specificObjectActive(int index)
@@ -55,7 +56,5 @@ public class PrintLogic : MonoBehaviour
             transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().enabled = true;
-        Console.WriteLine("test");
-
     }
 }
