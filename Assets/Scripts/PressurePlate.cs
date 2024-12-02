@@ -18,6 +18,7 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     bool stayActivated;
 
+    public bool isActive = false;
     int items;
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +26,7 @@ public class PressurePlate : MonoBehaviour
         if (ShouldIncrement(other))
         {
             items++;
-            Sensor.GetComponent<SensorChangeMaterial>().active = true;
+            isActive = true;
         }
     }
 
@@ -36,7 +37,7 @@ public class PressurePlate : MonoBehaviour
             items--;
             if (items == 0)
             {
-                Sensor.GetComponent<SensorChangeMaterial>().active = false;
+                isActive = false;
             }
         }
     }
