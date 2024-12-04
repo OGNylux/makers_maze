@@ -21,7 +21,7 @@ public class PhysicsRig : MonoBehaviour
     void FixedUpdate()
     {
         bodyCollider.height = Mathf.Clamp(playerHead.localPosition.y, bodyHeightMin, bodyHeightMax);
-        bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height/2, playerHead.localPosition.z);
+        //bodyCollider.center = new Vector3(playerHead.localPosition.x, bodyCollider.height/2, playerHead.localPosition.z);
 
         leftHandJoint.targetPosition = leftController.localPosition;
         leftHandJoint.targetRotation = leftController.localRotation;
