@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using Unity.XR.CoreUtils.Bindings;
 using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.State;
 using UnityEngine.XR.Interaction.Toolkit.Filtering;
@@ -11,11 +10,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// Follow animation affordance for <see cref="IPokeStateDataProvider"/>, such as <see cref="XRPokeFilter"/>.
     /// Used to animate a pressed transform, such as a button to follow the poke position.
     /// </summary>
-    /// <remarks>
-    /// The Affordance System namespace and all associated classes have been deprecated.
-    /// The existing affordance system will be moved, replaced and updated with a new interaction
-    /// feedback system in a future version of XRI, including this sample script.
-    /// </remarks>
     [AddComponentMenu("XR/XR Poke Follow Affordance", 22)]
     public class XRPokeFollowAffordance : MonoBehaviour
     {
@@ -103,21 +97,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             set => m_MaxDistance = value;
         }
 
-        /// <summary>
-        /// The original position of this interactable before any pushes have been applied.
-        /// </summary>
-        public Vector3 initialPosition
-        {
-            get => m_InitialPosition;
-            set => m_InitialPosition = value;
-        }
-
         IPokeStateDataProvider m_PokeDataProvider;
-        IMultiPokeStateDataProvider m_MultiPokeStateDataProvider;
 
-#pragma warning disable CS0618 // Type or member is obsolete
         readonly Vector3TweenableVariable m_TransformTweenableVariable = new Vector3TweenableVariable();
-#pragma warning restore CS0618 // Type or member is obsolete
         readonly BindingsGroup m_BindingsGroup = new BindingsGroup();
         Vector3 m_InitialPosition;
         bool m_IsFirstFrame;
@@ -127,9 +109,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// </summary>
         protected void Awake()
         {
-            m_MultiPokeStateDataProvider = GetComponentInParent<IMultiPokeStateDataProvider>();
-            if(m_MultiPokeStateDataProvider == null)
-                m_PokeDataProvider = GetComponentInParent<IPokeStateDataProvider>();
+            m_PokeDataProvider = GetComponentInParent<IPokeStateDataProvider>();
         }
 
         /// <summary>
@@ -141,11 +121,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             {
                 m_InitialPosition = m_PokeFollowTransform.localPosition;
                 m_BindingsGroup.AddBinding(m_TransformTweenableVariable.Subscribe(OnTransformTweenableVariableUpdated));
-                
-                if(m_MultiPokeStateDataProvider != null)
-                    m_BindingsGroup.AddBinding(m_MultiPokeStateDataProvider.GetPokeStateDataForTarget(transform).Subscribe(OnPokeStateDataUpdated));
-                else if(m_PokeDataProvider != null)
-                    m_BindingsGroup.AddBinding(m_PokeDataProvider.pokeStateData.SubscribeAndUpdate(OnPokeStateDataUpdated));
+                m_BindingsGroup.AddBinding(m_PokeDataProvider.pokeStateData.SubscribeAndUpdate(OnPokeStateDataUpdated));
             }
             else
             {
@@ -201,14 +177,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             {
                 m_TransformTweenableVariable.target = m_InitialPosition;
             }
-        }
-
-        public void ResetFollowTransform()
-        {
-            if (!m_ClampToMaxDistance || m_PokeFollowTransform == null)
-                return;
-
-            m_PokeFollowTransform.localPosition = m_InitialPosition;
         }
     }
 }

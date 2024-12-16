@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7693184380767619946}
   - component: {fileID: 4924506573850889901}
   - component: {fileID: 759886463073337534}
-  - component: {fileID: 5800936643595229357}
   m_Layer: 0
   m_Name: Ray Interactor
   m_TagString: Untagged
@@ -28,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787346994484839025}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7462879561657043759
 MonoBehaviour:
@@ -77,7 +76,7 @@ MonoBehaviour:
       m_Name: Select
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 429ea6c2-900b-4600-9dec-ef981c442e74
+      m_Id: 7e37f3bf-52a5-4e0a-b2c0-2c5ad3a2ce88
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -86,7 +85,7 @@ MonoBehaviour:
       m_Name: Select Value
       m_Type: 0
       m_ExpectedControlType: Axis
-      m_Id: a2b28d4d-fc21-46c4-a146-41ab6eafdc6e
+      m_Id: ee2e841a-5ed7-4432-945a-3eafc3ae9bc7
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -98,6 +97,7 @@ MonoBehaviour:
     m_ManualValue: 0
     m_ManualQueuePerformed: 0
     m_ManualQueueWasPerformedThisFrame: 0
+    m_ManualQueueWasCompletedThisFrame: 0
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
   m_ActivateInput:
@@ -106,7 +106,7 @@ MonoBehaviour:
       m_Name: Activate
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 9463bd95-e6a6-4e29-a93b-3f0fef3a8139
+      m_Id: 7647746d-87bf-4d71-b190-f585e75c3cf9
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -115,7 +115,7 @@ MonoBehaviour:
       m_Name: Activate Value
       m_Type: 0
       m_ExpectedControlType: Axis
-      m_Id: 2a74813e-aeb0-4476-9b57-ae667c5da716
+      m_Id: 2c1ce6c0-5123-4954-aacb-08a89b5342cf
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -127,6 +127,7 @@ MonoBehaviour:
     m_ManualValue: 0
     m_ManualQueuePerformed: 0
     m_ManualQueueWasPerformedThisFrame: 0
+    m_ManualQueueWasCompletedThisFrame: 0
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
   m_SelectActionTrigger: 1
@@ -147,21 +148,21 @@ MonoBehaviour:
   m_PlayAudioClipOnHoverCanceled: 0
   m_AudioClipForOnHoverCanceled: {fileID: 0}
   m_AllowHoverAudioWhileSelecting: 0
-  m_PlayHapticsOnSelectEntered: 0
-  m_HapticSelectEnterIntensity: 0
-  m_HapticSelectEnterDuration: 0
-  m_PlayHapticsOnSelectExited: 0
-  m_HapticSelectExitIntensity: 0
-  m_HapticSelectExitDuration: 0
+  m_PlayHapticsOnSelectEntered: 1
+  m_HapticSelectEnterIntensity: 0.5
+  m_HapticSelectEnterDuration: 0.1
+  m_PlayHapticsOnSelectExited: 1
+  m_HapticSelectExitIntensity: 0.5
+  m_HapticSelectExitDuration: 0.1
   m_PlayHapticsOnSelectCanceled: 0
   m_HapticSelectCancelIntensity: 0
   m_HapticSelectCancelDuration: 0
-  m_PlayHapticsOnHoverEntered: 0
-  m_HapticHoverEnterIntensity: 0
-  m_HapticHoverEnterDuration: 0
-  m_PlayHapticsOnHoverExited: 0
-  m_HapticHoverExitIntensity: 0
-  m_HapticHoverExitDuration: 0
+  m_PlayHapticsOnHoverEntered: 1
+  m_HapticHoverEnterIntensity: 0.25
+  m_HapticHoverEnterDuration: 0.1
+  m_PlayHapticsOnHoverExited: 1
+  m_HapticHoverExitIntensity: 0.25
+  m_HapticHoverExitDuration: 0.1
   m_PlayHapticsOnHoverCanceled: 0
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
@@ -180,9 +181,9 @@ MonoBehaviour:
   m_ControlPointDistance: 10
   m_ControlPointHeight: 5
   m_SampleFrequency: 60
-  m_HitDetectionType: 2
-  m_SphereCastRadius: 0.0125
-  m_ConeCastAngle: 3
+  m_HitDetectionType: 0
+  m_SphereCastRadius: 0.1
+  m_ConeCastAngle: 6
   m_RaycastMask:
     serializedVersion: 2
     m_Bits: 2147483681
@@ -210,14 +211,14 @@ MonoBehaviour:
   m_EnableARRaycasting: 0
   m_OccludeARHitsWith3DObjects: 0
   m_OccludeARHitsWith2DObjects: 0
-  m_ScaleMode: 1
+  m_ScaleMode: 0
   m_UIPressInput:
     m_InputSourceMode: 2
     m_InputActionPerformed:
       m_Name: UI Press
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 114095d0-3f3f-4498-8173-6c1ef51c395f
+      m_Id: 0661f34c-b74d-4bdd-a582-52deecc691f0
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -226,7 +227,7 @@ MonoBehaviour:
       m_Name: UI Press Value
       m_Type: 0
       m_ExpectedControlType: Axis
-      m_Id: 28edaf06-248c-4566-9e77-e0a8306f5b23
+      m_Id: 4e50973d-ff07-44f3-a875-58617ded567a
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -238,6 +239,7 @@ MonoBehaviour:
     m_ManualValue: 0
     m_ManualQueuePerformed: 0
     m_ManualQueueWasPerformedThisFrame: 0
+    m_ManualQueueWasCompletedThisFrame: 0
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
   m_UIScrollInput:
@@ -246,7 +248,7 @@ MonoBehaviour:
       m_Name: UI Scroll
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: a97b7b43-9f7a-4629-8bf8-cd9e4366135e
+      m_Id: 2ca32b13-ad04-40e7-9c31-39f6bc65c9b5
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -260,7 +262,7 @@ MonoBehaviour:
       m_Name: Translate Manipulation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 4ebd55dc-790f-4902-a152-a2ad2f58b954
+      m_Id: 1c87cf87-1a40-4fa6-9bdf-fbe9bfb5d616
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -274,7 +276,7 @@ MonoBehaviour:
       m_Name: Rotate Manipulation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 57b99265-24c1-4c01-9723-1e2d868d39a3
+      m_Id: 8e0cd270-868c-44f8-9e29-8582090c4685
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -288,7 +290,7 @@ MonoBehaviour:
       m_Name: Directional Manipulation
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: 8745cceb-738c-4169-a81b-c9611ff835c1
+      m_Id: 3f86a787-4a9e-40e4-9ae4-63d706766908
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -302,7 +304,7 @@ MonoBehaviour:
       m_Name: Scale Toggle
       m_Type: 1
       m_ExpectedControlType: 
-      m_Id: 3f354885-6c35-4d4c-8937-f39f9281823f
+      m_Id: fa4ca514-7ac2-4a63-be69-7128bdba905f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -311,7 +313,7 @@ MonoBehaviour:
       m_Name: Scale Toggle Value
       m_Type: 0
       m_ExpectedControlType: Axis
-      m_Id: 7cb37a30-9cf3-4543-a117-80b77e8a2158
+      m_Id: 6cb87128-15eb-4cfc-90cd-6c8c9cbd7c34
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -323,6 +325,7 @@ MonoBehaviour:
     m_ManualValue: 0
     m_ManualQueuePerformed: 0
     m_ManualQueueWasPerformedThisFrame: 0
+    m_ManualQueueWasCompletedThisFrame: 0
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
   m_ScaleOverTimeInput:
@@ -331,7 +334,7 @@ MonoBehaviour:
       m_Name: Scale Over Time
       m_Type: 0
       m_ExpectedControlType: Vector2
-      m_Id: bb96d9ab-3ef4-47b7-85c5-67f09482637d
+      m_Id: 6ba80ca1-6ffb-438c-9ce0-404bd48dd6a7
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -345,7 +348,7 @@ MonoBehaviour:
       m_Name: Scale Distance Delta
       m_Type: 0
       m_ExpectedControlType: Axis
-      m_Id: 16abd2a2-ba80-4824-a33c-cd5a47c3cfa5
+      m_Id: dd7879b6-912f-4350-915e-0ff94448a58f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -355,6 +358,7 @@ MonoBehaviour:
     m_ManualValue: 0
 --- !u!120 &7693184380767619946
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -397,7 +401,7 @@ LineRenderer:
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.02
+    widthMultiplier: 0.01
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -449,16 +453,20 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 4
     numCapVertices: 4
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!114 &4924506573850889901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,10 +479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e988983f96fe1dd48800bcdfc82f23e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LineWidth: 0.005
+  m_LineWidth: 0.01
   m_OverrideInteractorLineLength: 1
   m_LineLength: 10
-  m_AutoAdjustLineLength: 1
+  m_AutoAdjustLineLength: 0
   m_MinLineLength: 0.5
   m_UseDistanceToHitAsMaxLineLength: 1
   m_LineRetractionDelay: 0.5
@@ -531,6 +539,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   m_InvalidColorGradient:
@@ -560,6 +569,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   m_BlockedColorGradient:
@@ -589,6 +599,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   m_TreatSelectionAsValidState: 1
@@ -614,49 +625,5 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30005
---- !u!114 &5800936643595229357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787346994484839025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd0b9921bce4eeb49bd05815b1135ac2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InteractorSourceObject: {fileID: 7462879561657043759}
-  m_HapticImpulsePlayer: {fileID: 0}
-  m_PlaySelectEntered: 1
-  m_SelectEnteredData:
-    m_Amplitude: 0.5
-    m_Duration: 0.1
-    m_Frequency: 0
-  m_PlaySelectExited: 0
-  m_SelectExitedData:
-    m_Amplitude: 0.5
-    m_Duration: 0.1
-    m_Frequency: 0
-  m_PlaySelectCanceled: 0
-  m_SelectCanceledData:
-    m_Amplitude: 0.5
-    m_Duration: 0.1
-    m_Frequency: 0
-  m_PlayHoverEntered: 1
-  m_HoverEnteredData:
-    m_Amplitude: 0.25
-    m_Duration: 0.1
-    m_Frequency: 0
-  m_PlayHoverExited: 0
-  m_HoverExitedData:
-    m_Amplitude: 0.25
-    m_Duration: 0.1
-    m_Frequency: 0
-  m_PlayHoverCanceled: 0
-  m_HoverCanceledData:
-    m_Amplitude: 0.25
-    m_Duration: 0.1
-    m_Frequency: 0
-  m_AllowHoverHapticsWhileSelecting: 0
+  m_SortingOrder: 5
+  m_SortAtRoot: 0
