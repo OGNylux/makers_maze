@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class FilamentManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class FilamentManager : MonoBehaviour
         }
     }
 
-
-
+    public void activate()
+    {
+        transform.GetComponent<XRSocketInteractor>().enabled = true;
+    }
 }
