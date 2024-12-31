@@ -12,6 +12,8 @@ TagManager:
   - Goal
   - Mirror
   - Sensor
+  - StudentCard
+  - Placeable
   layers:
   - Default
   - TransparentFX
