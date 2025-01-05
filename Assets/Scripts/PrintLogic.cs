@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrintLogic : MonoBehaviour
 {
@@ -9,6 +10,17 @@ public class PrintLogic : MonoBehaviour
     public int filamentID = 0;
     public GameObject[] prints;
     private int shapesNum = 3;
+
+    public void setUIColorOn()
+    {
+        var color = new Color(0.0f, 0.5882353f, 0.5333334f, 1);
+        transform.GetComponent<Image>().color = color;
+    }
+    public void setUIColorOff()
+    {
+        var color = new Color(0.227451f, 0.2666667f, 0.2745098f, 1);
+        transform.GetComponent<Image>().color = color;
+    }
 
     public void setPrintID(int printID)
     {

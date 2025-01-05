@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,14 @@ public class SensorChangeMaterial : MonoBehaviour
 
     void ToggleMaterial()
     {
+        Transform child = transform.Find("Indicators");
         if (active)
         {
-            GetComponent<Renderer>().material = newmaterial;
+            child.GetComponent<Renderer>().material = newmaterial;
         }
-        else 
-        { 
-            GetComponent<Renderer>().material = oldmaterial;
+        else
+        {
+            child.GetComponent<Renderer>().material = oldmaterial;
         }
     }
 }
