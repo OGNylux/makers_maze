@@ -12,10 +12,12 @@ public class FilamentManager : MonoBehaviour
 
     public void lockObjectOnSnapping()
     {
+        transform.GetComponent<Renderer>().enabled = true;
         foreach (GameObject filament in Filaments)
         {
             if (filament.transform.GetComponent<XRGrabInteractable>().singleGrabTransformersCount > 1)
             {
+                Debug.Log("Locking object");
                 filament.GetComponent<BoxCollider>().enabled = false;
                 currentLockedObject = filament;
             }

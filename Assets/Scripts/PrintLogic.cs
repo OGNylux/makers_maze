@@ -11,6 +11,9 @@ public class PrintLogic : MonoBehaviour
     public GameObject[] prints;
     private int shapesNum = 3;
 
+    [SerializeField] 
+    private Button printButton;
+
     public void setUIColorOn()
     {
         var color = new Color(0.0f, 0.5882353f, 0.5333334f, 1);
@@ -59,6 +62,7 @@ public class PrintLogic : MonoBehaviour
         GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID]); // Create new object
         newPrintObject.transform.localScale = transform.localScale; // Set scale
         newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
+        printButton.interactable = true; // Enable print button
     }
 
     public void specificObjectActive(int index)
