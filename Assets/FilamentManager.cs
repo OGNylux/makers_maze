@@ -10,31 +10,30 @@ public class FilamentManager : MonoBehaviour
 
     public GameObject currentLockedObject = null;
 
+    XRSocketInteractor socket;
+
+    private void Start()
+    {
+        socket = GetComponent<XRSocketInteractor>();
+        lockObjectOnSnapping();
+    }
     public void lockObjectOnSnapping()
     {
-        transform.GetComponent<Renderer>().enabled = true;
-        foreach (GameObject filament in Filaments)
-        {
-            if (filament.transform.GetComponent<XRGrabInteractable>().singleGrabTransformersCount > 1)
-            {
-                Debug.Log("Locking object");
-                filament.GetComponent<BoxCollider>().enabled = false;
-                currentLockedObject = filament;
-            }
-        }
+        IXRSelectInteractable obj = socket.GetOldestInteractableSelected();
+        obj.transform.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void unlockObjectOnSnapping()
     {
-        if (currentLockedObject)
+        IXRSelectInteractable obj = socket.GetOldestInteractableSelected();
+        if (obj.transform.gameObject != null)
         {
-            currentLockedObject.GetComponent<BoxCollider>().enabled = true;
-            currentLockedObject = null;
+            obj.transform.GetComponent<BoxCollider>().enabled = true;
         }
     }
 
-    public void activate()
+    public bool hasObject()
     {
-        transform.GetComponent<XRSocketInteractor>().enabled = true;
+        return socket.hasSelection;
     }
 }
