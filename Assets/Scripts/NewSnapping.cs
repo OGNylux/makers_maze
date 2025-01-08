@@ -1,53 +1,71 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Filtering;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class ObjectSnapper : MonoBehaviour
 {
     public Transform snapPosition; // Die Position, an die das Objekt snappen soll
     public GameObject redQuad; // Rotes leuchtendes Quad
     public GameObject greenQuad; // Grünes leuchtendes Quad
-    public Vector3 minSize; // Minimale Größe für die Platzierung
-    public Vector3 maxSize; // Maximale Größe für die Platzierung
+    Vector3 minSize = new Vector3(0.111f, 0.111f, 0.111f);// Minimale Größe für die Platzierung                      
+    Vector3 maxSize = new Vector3(0.297f, 0.297f, 0.297f);// Maximale Größe für die Platzierung
+    public XRSocketInteractor socket;
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        // Prüfen, ob das Objekt das richtige Tag hat (z.B. "Placeable")
-        if (other.CompareTag("Placeable"))
+        socket = GetComponent<XRSocketInteractor>();
+    }
+
+    public void CheckSize()
+    {
+        // Hol das älteste platzierte Objekt aus dem Socket
+        IXRSelectInteractable interactable = socket.GetOldestInteractableSelected();
+        if (interactable == null)
         {
-            GameObject obj = other.gameObject;
+            Debug.Log("Kein Objekt im Socket.");
+            return;
+        }
 
-            // Größe überprüfen
-            Vector3 objSize = obj.GetComponent<Renderer>().bounds.size;
-            if (objSize.x > maxSize.x || objSize.y > maxSize.y || objSize.z > maxSize.z)
-            {
-                Debug.Log("Objekt ist zu groß.");
-                return;
-            }
-            if (objSize.x < minSize.x || objSize.y < minSize.y || objSize.z < minSize.z)
-            {
-                Debug.Log("Objekt ist zu klein.");
-                return;
-            }
+        // Hole das GameObject des Interactables
+        GameObject obj = interactable.transform.gameObject;
 
-            // Snappen
-            obj.transform.position = snapPosition.position;
-            obj.transform.rotation = snapPosition.rotation;
+        // Prüfe die lokale Skalierung
+        Vector3 objSize = obj.transform.localScale;
 
-            // Farbe ändern
+        // Überprüfe, ob die Größe im erlaubten Bereich liegt
+        if (objSize.x > maxSize.x || objSize.y > maxSize.y || objSize.z > maxSize.z)
+        {
+            // Objekt ist zu groß, Socket deaktivieren und neu aktivieren
+            Debug.Log("Objektgröße ist zu groß. Socket wird zurückgesetzt.");
+            StartCoroutine(ResetSocket());
+        }
+        else if (objSize.x >= minSize.x && objSize.y >= minSize.y && objSize.z >= minSize.z)
+        {
+            // Größe ist im erlaubten Bereich
+            Debug.Log("Objektgröße ist korrekt.");
+            //SnapObject(obj); // Falls korrekt, snappe das Objekt
             redQuad.SetActive(false);
             greenQuad.SetActive(true);
-
-            Debug.Log("Objekt korrekt platziert!");
+            obj.GetComponent<BoxCollider>().enabled = false;
+            Debug.Log(obj.name);
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // Wenn das Objekt entfernt wird, zurücksetzen
-        if (other.CompareTag("Placeable"))
+        else
         {
-            redQuad.SetActive(true);
-            greenQuad.SetActive(false);
-            Debug.Log("Objekt entfernt.");
+            // Objekt ist zu klein
+            Debug.Log("Objektgröße ist zu klein. Socket wird zurückgesetzt.");
+            StartCoroutine(ResetSocket());
         }
     }
+
+    // Coroutine zum Zurücksetzen des Sockets
+    private IEnumerator ResetSocket()
+    {
+        socket.enabled = false; // Socket deaktivieren
+        yield return new WaitForSeconds(0.1f); // Kurze Pause
+        socket.enabled = true; // Socket wieder aktivieren
+    }
+
+
 }
