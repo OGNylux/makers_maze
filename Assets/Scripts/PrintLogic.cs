@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,10 @@ public class PrintLogic : MonoBehaviour
     public int filamentID = 0;
     public GameObject[] prints;
     private int shapesNum = 3;
+
+    public bool active = false;
+    public GameObject FilamentManager;
+    public RectTransform infoPanel;
 
     [SerializeField] 
     private Button printButton;
@@ -23,6 +28,11 @@ public class PrintLogic : MonoBehaviour
     {
         var color = new Color(0.227451f, 0.2666667f, 0.2745098f, 1);
         transform.GetComponent<Image>().color = color;
+    }
+
+    public void setActive(bool active)
+    {
+        this.active = active;
     }
 
     public void setPrintID(int printID)
@@ -54,6 +64,23 @@ public class PrintLogic : MonoBehaviour
     public void createObjectWithDelay(float delay)
     {
         StartCoroutine(DelayedCreateObject(delay));
+    }
+
+    public void checkFilament()
+    {
+        Debug.Log("Filament ID: " + filamentID);
+        Debug.Log(FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal"));
+        if (((filamentID == 0 || filamentID == 1) && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal")) ||
+                (filamentID == 2 && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Reflective")))
+        {
+            printButton.interactable = true;
+            infoPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            printButton.interactable = false;
+            infoPanel.gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator DelayedCreateObject(float delay)

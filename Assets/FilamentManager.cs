@@ -32,6 +32,13 @@ public class FilamentManager : MonoBehaviour
         }
     }
 
+    public bool hasTag(string tag)
+    {
+        IXRSelectInteractable obj = socket.GetOldestInteractableSelected();
+
+        return obj.transform.gameObject.CompareTag(tag);
+    }
+
     public bool hasObject()
     {
         return socket.hasSelection;

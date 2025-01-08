@@ -13,14 +13,15 @@ public class UIChangeColor : MonoBehaviour
     public RectTransform panel6;
     public RectTransform actionPanel;
     public RectTransform mainPanel;
+    public RectTransform spoolPanel;
     public GameObject FilamentHolder;
 
     // change the color of the panel with a 0.25 second delay each
     public void ChangeColorUnload()
     {
-        if (!FilamentHolder.GetComponent<FilamentManager>().hasObject())
+        if (FilamentHolder.GetComponent<FilamentManager>().hasObject())
         {
-            panel6.transform.gameObject.SetActive(false);
+            mainPanel.transform.gameObject.SetActive(false);
             transform.gameObject.SetActive(true);
             StartCoroutine(ChangeColorUnloadWithDelay());
         }
@@ -55,9 +56,14 @@ public class UIChangeColor : MonoBehaviour
     {
         if (FilamentHolder.GetComponent<FilamentManager>().hasObject())
         {
-            panel6.transform.gameObject.SetActive(false);
+            mainPanel.transform.gameObject.SetActive(false);
             transform.gameObject.SetActive(true);
+            spoolPanel.transform.gameObject.SetActive(false);
             StartCoroutine(ChangeColorLoadWithDelay());
+        }
+        else
+        {
+            spoolPanel.transform.gameObject.SetActive(true);
         }
     }
 
