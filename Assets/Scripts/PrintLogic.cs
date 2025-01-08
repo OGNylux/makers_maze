@@ -87,7 +87,9 @@ public class PrintLogic : MonoBehaviour
     {
         yield return new WaitForSeconds(delay); // Wait for delay
         GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID]); // Create new object
-        newPrintObject.transform.localScale = transform.localScale; // Set scale
+        newPrintObject.transform.gameObject.GetComponent<ScaleOnPickup>().SetXScale(transform.localScale.x); // Set scale
+        newPrintObject.transform.gameObject.GetComponent<ScaleOnPickup>().SetYScale(transform.localScale.y); // Set scale
+        newPrintObject.transform.gameObject.GetComponent<ScaleOnPickup>().SetZScale(transform.localScale.z); // Set scale
         newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
         printButton.interactable = true; // Enable print button
     }
@@ -99,5 +101,10 @@ public class PrintLogic : MonoBehaviour
             transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public void resetScale()
+    {
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 }
