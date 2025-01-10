@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIChangeColor : MonoBehaviour
@@ -24,6 +25,8 @@ public class UIChangeColor : MonoBehaviour
             mainPanel.transform.gameObject.SetActive(false);
             transform.gameObject.SetActive(true);
             StartCoroutine(ChangeColorUnloadWithDelay());
+
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
@@ -60,6 +63,7 @@ public class UIChangeColor : MonoBehaviour
             transform.gameObject.SetActive(true);
             spoolPanel.transform.gameObject.SetActive(false);
             StartCoroutine(ChangeColorLoadWithDelay());
+            EventSystem.current.SetSelectedGameObject(null);
         }
         else
         {
