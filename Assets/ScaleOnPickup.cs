@@ -7,6 +7,7 @@ public class ScaleOnPickup : MonoBehaviour
     public Vector3 scale = new Vector3(0.5f, 0.5f, 0.5f);
     public void Scale()
     {
+        Debug.Log(transform.gameObject.name);
         transform.localScale = scale;
     }
 

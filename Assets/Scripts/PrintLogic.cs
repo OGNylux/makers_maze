@@ -14,6 +14,7 @@ public class PrintLogic : MonoBehaviour
 
     public bool active = false;
     public GameObject FilamentManager;
+    public GameObject printer;
     public RectTransform infoPanel;
 
     [SerializeField] 
@@ -80,17 +81,22 @@ public class PrintLogic : MonoBehaviour
         {
             printButton.interactable = false;
             infoPanel.gameObject.SetActive(true);
+            infoPanel.GetComponent<AudioSource>().Play();
         }
     }
 
     private IEnumerator DelayedCreateObject(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for delay
-        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID]); // Create new object
-        newPrintObject.transform.gameObject.GetComponent<ScaleOnPickup>().SetXScale(transform.localScale.x); // Set scale
-        newPrintObject.transform.gameObject.GetComponent<ScaleOnPickup>().SetYScale(transform.localScale.y); // Set scale
-        newPrintObject.transform.gameObject.GetComponent<ScaleOnPickup>().SetZScale(transform.localScale.z); // Set scale
-        newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
+        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], new Vector3(-1.75999999f, 0.351000011f, -41.3510017f), Quaternion.identity); // Create new object
+
+        GameObject child = newPrintObject.transform.Find("Model").transform.gameObject;
+
+        child.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetXScale(transform.localScale.x); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetYScale(transform.localScale.y); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetZScale(transform.localScale.z); // Set scale
         printButton.interactable = true; // Enable print button
     }
 
