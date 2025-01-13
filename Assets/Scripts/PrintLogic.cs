@@ -88,7 +88,7 @@ public class PrintLogic : MonoBehaviour
     private IEnumerator DelayedCreateObject(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for delay
-        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], new Vector3(-1.75999999f, 0.351000011f, -41.3510017f), Quaternion.identity); // Create new object
+        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], new Vector3(-2.40700006f, 1.26400006f, -41.2000732f), Quaternion.identity); // Create new object
 
         GameObject child = newPrintObject.transform.Find("Model").transform.gameObject;
 
