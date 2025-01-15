@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrintLogic : MonoBehaviour
 {
@@ -9,6 +11,30 @@ public class PrintLogic : MonoBehaviour
     public int filamentID = 0;
     public GameObject[] prints;
     private int shapesNum = 3;
+
+    public bool active = false;
+    public GameObject FilamentManager;
+    public GameObject printer;
+    public RectTransform infoPanel;
+
+    [SerializeField] 
+    private Button printButton;
+
+    public void setUIColorOn()
+    {
+        var color = new Color(0.0f, 0.5882353f, 0.5333334f, 1);
+        transform.GetComponent<Image>().color = color;
+    }
+    public void setUIColorOff()
+    {
+        var color = new Color(0.227451f, 0.2666667f, 0.2745098f, 1);
+        transform.GetComponent<Image>().color = color;
+    }
+
+    public void setActive(bool active)
+    {
+        this.active = active;
+    }
 
     public void setPrintID(int printID)
     {
@@ -41,12 +67,37 @@ public class PrintLogic : MonoBehaviour
         StartCoroutine(DelayedCreateObject(delay));
     }
 
+    public void checkFilament()
+    {
+        Debug.Log("Filament ID: " + filamentID);
+        Debug.Log(FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal"));
+        if (((filamentID == 0 || filamentID == 1) && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal")) ||
+                (filamentID == 2 && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Reflective")))
+        {
+            printButton.interactable = true;
+            infoPanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            printButton.interactable = false;
+            infoPanel.gameObject.SetActive(true);
+            infoPanel.GetComponent<AudioSource>().Play();
+        }
+    }
+
     private IEnumerator DelayedCreateObject(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for delay
-        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID]); // Create new object
-        newPrintObject.transform.localScale = transform.localScale; // Set scale
-        newPrintObject.transform.position = new Vector3(newPrintObject.transform.position.x, 0.92f, newPrintObject.transform.position.z); // Set position
+        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], new Vector3(-2.40700006f, 1.26400006f, -41.2000732f), Quaternion.identity); // Create new object
+
+        GameObject child = newPrintObject.transform.Find("Model").transform.gameObject;
+
+        child.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetXScale(transform.localScale.x); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetYScale(transform.localScale.y); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetZScale(transform.localScale.z); // Set scale
+        printButton.interactable = true; // Enable print button
     }
 
     public void specificObjectActive(int index)
@@ -56,5 +107,10 @@ public class PrintLogic : MonoBehaviour
             transform.GetChild(i).gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         transform.GetChild(index).gameObject.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public void resetScale()
+    {
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 }

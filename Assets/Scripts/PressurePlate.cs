@@ -23,12 +23,15 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
+
         if (ShouldIncrement(other))
         {
             items++;
             isActive = true;
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {
