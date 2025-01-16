@@ -12,6 +12,8 @@ TagManager:
   - Goal
   - Mirror
   - Sensor
+  - Normal
+  - Reflective
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Post
   - 
   - 
   - 
