@@ -10,6 +10,7 @@ public class LampChangeColor : MonoBehaviour
     public Material oldMaterial;
     public Material newMaterial;
 
+    private bool active = false;
 
     void Start()
     {
@@ -26,7 +27,9 @@ public class LampChangeColor : MonoBehaviour
     {
         foreach (GameObject activator in activators)
         {
-            if (activator.GetComponent<SensorChangeMaterial>().active == false)
+            if (activator.GetComponent<PressurePlate>() != null) active = activator.GetComponent<PressurePlate>().isActive;
+            else if (activator.GetComponent<SensorChangeMaterial>() != null) active = activator.GetComponent<SensorChangeMaterial>().active;
+            if (active == false)
             {
                 transform.GetComponent<Renderer>().material = oldMaterial;
                 return;
