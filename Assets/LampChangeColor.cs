@@ -11,6 +11,7 @@ public class LampChangeColor : MonoBehaviour
     public Material newMaterial;
 
     private bool active = false;
+    public bool stayActive = false;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class LampChangeColor : MonoBehaviour
             else if (activator.GetComponent<SensorChangeMaterial>() != null) active = activator.GetComponent<SensorChangeMaterial>().active;
             if (active == false)
             {
-                transform.GetComponent<Renderer>().material = oldMaterial;
+                if (!stayActive) transform.GetComponent<Renderer>().material = oldMaterial;
                 return;
             }
         }
