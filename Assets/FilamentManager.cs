@@ -20,7 +20,10 @@ public class FilamentManager : MonoBehaviour
     public void lockObjectOnSnapping()
     {
         IXRSelectInteractable obj = socket.GetOldestInteractableSelected();
-        obj.transform.GetComponent<BoxCollider>().enabled = false;
+        if (obj != null)
+        {
+            obj.transform.GetComponent<BoxCollider>().enabled = false;
+        }
     }
 
     public void unlockObjectOnSnapping()

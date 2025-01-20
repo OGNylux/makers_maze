@@ -24,6 +24,7 @@ public class Laser : MonoBehaviour
     {
         FillLists();
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = maxBounces + 1; // Stelle sicher, dass der LineRenderer genügend Positionen hat
 
         for (int i = 0; i < particles.Count; i++)
         {
