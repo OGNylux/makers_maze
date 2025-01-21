@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class textscript : MonoBehaviour
 {
-    public TextMeshPro Textrobotobject;
     public string Textrobot;
+    public TMP_Text TextMesh;
     // Start is called before the first frame update
     void Start()
     {
-
+        TextMesh = GetComponent<TextMeshProUGUI>();
+        Textrobotstart();
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class textscript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < Textrobot.Length; i++)
         {
-            Textrobotobject.text += Textrobot[i];
+            TextMesh.text += Textrobot[i];
             string text = "Play_" + char.ToUpper(Textrobot[i]);
             yield return new WaitForSeconds(0.05f);
         }
