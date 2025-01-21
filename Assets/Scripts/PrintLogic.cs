@@ -15,6 +15,9 @@ public class PrintLogic : MonoBehaviour
     public GameObject FilamentManager;
     public GameObject printer;
     public RectTransform infoPanel;
+    public RectTransform infoPanel2;
+    public bool canHeavyPrint = false;
+    public bool canMirrorPrint = false;
 
     [SerializeField] 
     private Button printButton;
@@ -44,6 +47,14 @@ public class PrintLogic : MonoBehaviour
     {
         this.filamentID = filamentID;
     }
+    public void setCanHeavyPrint(bool canHeavyPrint)
+    {
+        this.canHeavyPrint = canHeavyPrint;
+    }
+    public void setCanMirrorPrint(bool canMirrorPrint)
+    {
+        this.canMirrorPrint = canMirrorPrint;
+    }
 
     public void ScaleX(float scaleX)
     {
@@ -68,8 +79,7 @@ public class PrintLogic : MonoBehaviour
 
     public void checkFilament()
     {
-        Debug.Log("Filament ID: " + filamentID);
-        Debug.Log(FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal"));
+        if ((filamentID == 1 && !canHeavyPrint) || (filamentID == 2 && !canMirrorPrint)) return;
         if (((filamentID == 0 || filamentID == 1) && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal")) ||
                 (filamentID == 2 && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Reflective")))
         {
@@ -81,6 +91,21 @@ public class PrintLogic : MonoBehaviour
             printButton.interactable = false;
             infoPanel.gameObject.SetActive(true);
             infoPanel.GetComponent<AudioSource>().Play();
+        }
+    }
+
+    public void checkPrintability()
+    {
+        if ((filamentID == 1 && canHeavyPrint) || (filamentID == 2 && canMirrorPrint))
+        {
+            printButton.interactable = true;
+            infoPanel2.gameObject.SetActive(false);
+        }
+        else
+        {
+            printButton.interactable = false;
+            infoPanel2.gameObject.SetActive(true);
+            infoPanel2.GetComponent<AudioSource>().Play();
         }
     }
 
