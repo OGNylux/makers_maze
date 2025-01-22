@@ -30,7 +30,7 @@ public class textscript : MonoBehaviour
         {
             TextMesh.text += Textrobot[i];
             string text = "Play_" + char.ToUpper(Textrobot[i]);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.075f);
         }
 
 
