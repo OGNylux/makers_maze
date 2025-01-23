@@ -25,12 +25,9 @@ public class ScaleScript : MonoBehaviour
     void Update()
     {
         Vector3 targetPos = new Vector3(transform.localPosition.x, startHeight + weight * multiplier, transform.localPosition.z);
-        Debug.Log("oboi"+ targetPos.y);
         if (targetPos.y < -0.5f) targetPos.y = -0.5f;
         if (targetPos.y > 2.5f) targetPos.y = 2.5f;
-        Debug.Log("wsv"+targetPos.y);
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, Time.deltaTime * 5);
-        Debug.Log(weight);
 
     }
 

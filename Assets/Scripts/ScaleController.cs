@@ -8,6 +8,7 @@ public class ScaleController : MonoBehaviour
     public GameObject firstScale;
     public GameObject secondScale;
     public bool active = false;
+    public bool stayActive = false;
     private const float weightTolerance = 1.5f;
 
     void Start()
@@ -19,14 +20,13 @@ public class ScaleController : MonoBehaviour
     {
         float firstWeight = firstScale.GetComponent<ScaleScript>().weight;
         float secondWeight = secondScale.GetComponent<ScaleScript>().weight;
-        Debug.Log("wdw" + Mathf.Abs(firstWeight - secondWeight));
         if (Mathf.Abs(firstWeight - secondWeight) <= weightTolerance)
         {
             active = true;
         }
         else
         {
-            active = false;
+            if (!stayActive) active = false;
         }
     }
 }

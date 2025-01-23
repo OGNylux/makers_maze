@@ -30,7 +30,8 @@ public class LampChangeColor : MonoBehaviour
         {
             if (activator.GetComponent<PressurePlate>() != null) active = activator.GetComponent<PressurePlate>().isActive;
             else if (activator.GetComponent<SensorChangeMaterial>() != null) active = activator.GetComponent<SensorChangeMaterial>().active;
-            else if (activator.GetComponent<ScaleController>() != null) active = activator.GetComponent<ScaleController>().active;   
+            else if (activator.GetComponent<ScaleController>() != null) active = activator.GetComponent<ScaleController>().active;
+            else if (activator.GetComponent<PickUpFilament>() != null) active = activator.GetComponent<PickUpFilament>().active;
             if (active == false)
             {
                 if (!stayActive) transform.GetComponent<Renderer>().material = oldMaterial;

@@ -8,6 +8,8 @@ public class WinSound : MonoBehaviour
     public GameObject[] activators;
     private bool playSound = false;
     private AudioSource audioSource;
+
+    private bool active = false;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -18,7 +20,18 @@ public class WinSound : MonoBehaviour
     {
         foreach (GameObject activator in activators)
         {
-            if (activator.GetComponent<SensorChangeMaterial>().active == false)
+
+            if (activator.GetComponent<SensorChangeMaterial>() != null)
+                active = activator.GetComponent<SensorChangeMaterial>().active;
+            else if (activator.GetComponent<ObjectSnapper>() != null)
+                active = activator.GetComponent<SensorChangeMaterial>().active;
+            else if (activator.GetComponent<PickUpFilament>() != null)
+                active = activator.GetComponent<PickUpFilament>().active;
+            else if (activator.GetComponent<ScaleController>() != null)
+                active = activator.GetComponent<ScaleController>().active;
+            else if (activator.GetComponent<PressurePlate>() != null)
+                active = activator.GetComponent<PressurePlate>().isActive;
+            if (active == false)
             {
                 return;
             }

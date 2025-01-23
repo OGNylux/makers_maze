@@ -12,6 +12,9 @@ public class ObjectSnapper : MonoBehaviour
     Vector3 minSize = new Vector3(0.111f, 0.111f, 0.111f);// Minimale Größe für die Platzierung                      
     Vector3 maxSize = new Vector3(0.297f, 0.297f, 0.297f);// Maximale Größe für die Platzierung
     public XRSocketInteractor socket;
+    public GameObject spool;
+
+    public bool active = false;
 
     private void Start()
     {
@@ -21,15 +24,14 @@ public class ObjectSnapper : MonoBehaviour
     public void CheckSize()
     {
         // Hol das älteste platzierte Objekt aus dem Socket
-        IXRSelectInteractable interactable = socket.GetOldestInteractableSelected();
+        GameObject interactable = socket.GetOldestInteractableSelected().transform.Find("Model").transform.gameObject;
         if (interactable == null)
         {
-            Debug.Log("Kein Objekt im Socket.");
             return;
         }
 
         // Hole das GameObject des Interactables
-        GameObject obj = interactable.transform.gameObject;
+        GameObject obj = interactable;
 
         // Prüfe die lokale Skalierung
         Vector3 objSize = obj.transform.localScale;
@@ -37,24 +39,20 @@ public class ObjectSnapper : MonoBehaviour
         // Überprüfe, ob die Größe im erlaubten Bereich liegt
         if (objSize.x > maxSize.x || objSize.y > maxSize.y || objSize.z > maxSize.z)
         {
-            // Objekt ist zu groß, Socket deaktivieren und neu aktivieren
-            Debug.Log("Objektgröße ist zu groß. Socket wird zurückgesetzt.");
             StartCoroutine(ResetSocket());
         }
         else if (objSize.x >= minSize.x && objSize.y >= minSize.y && objSize.z >= minSize.z)
         {
-            // Größe ist im erlaubten Bereich
-            Debug.Log("Objektgröße ist korrekt.");
             //SnapObject(obj); // Falls korrekt, snappe das Objekt
+            active = true;
+            spool.SetActive(true);
             redQuad.SetActive(false);
             greenQuad.SetActive(true);
             obj.GetComponent<BoxCollider>().enabled = false;
-            Debug.Log(obj.name);
+
         }
         else
         {
-            // Objekt ist zu klein
-            Debug.Log("Objektgröße ist zu klein. Socket wird zurückgesetzt.");
             StartCoroutine(ResetSocket());
         }
     }

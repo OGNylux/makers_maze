@@ -9,6 +9,7 @@ public class FlipDoorOpen : MonoBehaviour
 
     private bool active = false;
     private bool open = false;
+    public int angle = 90;
 
     void Start()
     {
@@ -29,13 +30,14 @@ public class FlipDoorOpen : MonoBehaviour
                 active = activator.GetComponent<PressurePlate>().isActive;
             else if (activator.GetComponent<SensorChangeMaterial>() != null)
                 active = activator.GetComponent<SensorChangeMaterial>().active;
+            else if (activator.GetComponent<PickUpFilament>() != null) active = activator.GetComponent<PickUpFilament>().active;
 
             if (active == false)
             {
                 return;
             }
         }
-        if (transform.rotation.eulerAngles.y < 5) return;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,90,0), Time.deltaTime / 4);
+        Debug.Log("FlipDoorOpen");
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, angle, 0), Time.deltaTime * 50);
     }
 }

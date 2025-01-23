@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6434419281045856132}
   - component: {fileID: 1400145574735891396}
   - component: {fileID: 4434534976865197641}
+  - component: {fileID: 7623013833280700185}
   m_Layer: 0
   m_Name: Heavy Cube
   m_TagString: Untagged
@@ -374,6 +375,20 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &7623013833280700185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792430312155038069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505599121cd7c2d4d87a596056b0142b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Keys:
+  - {fileID: 11400000, guid: 966ff762f4ac08a478b3b94af6104fe9, type: 2}
 --- !u!1 &8427979098913681907
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,10 @@ public class LaserGateOpen : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        ChangeColor();
+    }
     // Update is called once per frame
     public void ChangeColor()
     {
@@ -29,7 +33,7 @@ public class LaserGateOpen : MonoBehaviour
                 return;
             }
         }
-
+        Debug.Log("LaserGateOpen");
         transform.gameObject.SetActive(false);
     }
 }

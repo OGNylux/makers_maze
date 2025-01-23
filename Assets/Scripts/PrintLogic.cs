@@ -18,6 +18,12 @@ public class PrintLogic : MonoBehaviour
     public RectTransform infoPanel2;
     public bool canHeavyPrint = false;
     public bool canMirrorPrint = false;
+    public int printerID = 0;
+
+    private Vector3 pos0 = new Vector3(40.5169983f, 40.8129997f, -23.4892082f);
+    private Vector3 pos1 = new Vector3(39.8785629f, 40.8110008f, -12.7832661f);
+    private Vector3 pos2 = new Vector3(47.2845917f, 40.8160019f, -33.3429985f);
+    private Vector3 pos3 = new Vector3(-2.40700006f, 1.26400006f, -41.2000732f);
 
     [SerializeField] 
     private Button printButton;
@@ -80,6 +86,14 @@ public class PrintLogic : MonoBehaviour
     public void checkFilament()
     {
         if ((filamentID == 1 && !canHeavyPrint) || (filamentID == 2 && !canMirrorPrint)) return;
+        if (!FilamentManager.gameObject.GetComponent<FilamentManager>().hasObject())
+        {
+            printButton.interactable = false;
+            infoPanel.gameObject.SetActive(true);
+            infoPanel.GetComponent<AudioSource>().Play();
+            return;
+        }
+
         if (((filamentID == 0 || filamentID == 1) && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Normal")) ||
                 (filamentID == 2 && FilamentManager.gameObject.GetComponent<FilamentManager>().hasTag("Reflective")))
         {
@@ -89,6 +103,7 @@ public class PrintLogic : MonoBehaviour
         else
         {
             printButton.interactable = false;
+            infoPanel2.gameObject.SetActive(false);
             infoPanel.gameObject.SetActive(true);
             infoPanel.GetComponent<AudioSource>().Play();
         }
@@ -96,7 +111,12 @@ public class PrintLogic : MonoBehaviour
 
     public void checkPrintability()
     {
-        if ((filamentID == 1 && canHeavyPrint) || (filamentID == 2 && canMirrorPrint))
+        if (!FilamentManager.gameObject.GetComponent<FilamentManager>().hasObject())
+        {
+            return;
+        }
+
+        if ((filamentID == 1 && canHeavyPrint) || (filamentID == 2 && canMirrorPrint) || filamentID == 0)
         {
             printButton.interactable = true;
             infoPanel2.gameObject.SetActive(false);
@@ -104,6 +124,7 @@ public class PrintLogic : MonoBehaviour
         else
         {
             printButton.interactable = false;
+            infoPanel.gameObject.SetActive(false);
             infoPanel2.gameObject.SetActive(true);
             infoPanel2.GetComponent<AudioSource>().Play();
         }
@@ -112,7 +133,12 @@ public class PrintLogic : MonoBehaviour
     private IEnumerator DelayedCreateObject(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for delay
-        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], new Vector3(-2.40700006f, 1.26400006f, -41.2000732f), Quaternion.identity); // Create new object
+        Vector3 location = new Vector3(0, 0, 0); // Set location
+        if (printerID == 0) location = pos0;
+        else if (printerID == 1) location = pos1;
+        else if (printerID == 2) location = pos2;
+        else if (printerID == 3) location = pos3;
+        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], location, Quaternion.identity); // Create new object
 
         GameObject child = newPrintObject.transform.Find("Model").transform.gameObject;
 

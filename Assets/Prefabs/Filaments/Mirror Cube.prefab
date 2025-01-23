@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 443180737985364107}
   - component: {fileID: 4767129121076292122}
   - component: {fileID: 8648429762414911363}
+  - component: {fileID: 5798134370390359984}
   m_Layer: 0
   m_Name: Mirror Cube
   m_TagString: Mirror
@@ -374,6 +375,20 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &5798134370390359984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743692251134847743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505599121cd7c2d4d87a596056b0142b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Keys:
+  - {fileID: 11400000, guid: 966ff762f4ac08a478b3b94af6104fe9, type: 2}
 --- !u!1 &7798014277521214917
 GameObject:
   m_ObjectHideFlags: 0

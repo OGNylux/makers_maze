@@ -20,15 +20,16 @@ public class VideoQueue : MonoBehaviour
         currentVideoPlayer = videoPlayers[0].GetComponent<VideoPlayer>();
     }
 
-    void rewatchVideo()
+    public void rewatchVideo()
     {
         Panel.gameObject.SetActive(false);
         currentVideoPlayer.Play();
     }
 
-    void nextVideo()
+    public void nextVideo()
     {
         Panel.gameObject.SetActive(false);
+        currentVideoImage.gameObject.SetActive(false);
         currentVideoIndex++;
         if (currentVideoIndex >= videoImages.Length)
         {
