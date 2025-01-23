@@ -16,6 +16,15 @@ public class VideoQueue : MonoBehaviour
 
     void Start()
     {
+        if (videoImages.Length == 0 || videoPlayers.Length == 0)
+        {
+            return;
+        }
+
+        if (videoImages.Length != videoPlayers.Length)
+        {
+            return;
+        }
         currentVideoImage = videoImages[0].GetComponent<RawImage>();
         currentVideoPlayer = videoPlayers[0].GetComponent<VideoPlayer>();
     }
