@@ -23,8 +23,6 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-
         if (ShouldIncrement(other))
         {
             items++;
@@ -49,8 +47,10 @@ public class PressurePlate : MonoBehaviour
     {
         if (allowAllGameObjects) return true;
         if (allowPlayers && other.CompareTag("Player")) return true;
-        if (other.TryGetComponent<CustomTags>(out var customTags))
+        if (other.transform.parent.TryGetComponent<CustomTags>(out var customTags))
         {
+            Debug.Log(other.name);
+
             if (allowAllFilaments && customTags.HasTag("Filament")) return true;
             if (allowHeavyFilament && customTags.HasTag("Heavy")) return true;
         }
