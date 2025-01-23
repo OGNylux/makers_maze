@@ -30,7 +30,7 @@ public class PickUpFilament : MonoBehaviour
                 if (unlockHeavy) filament.GetComponent<PrintLogic>().setCanHeavyPrint(true);
                 if (unlockMirror) filament.GetComponent<PrintLogic>().setCanMirrorPrint(true);
             }
-            transform.gameObject.SetActive(false);
+            transform.position = new Vector3(0, -100, 0);
         }
     }
 }

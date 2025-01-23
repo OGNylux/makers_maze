@@ -23,7 +23,7 @@ public class PrintLogic : MonoBehaviour
     private Vector3 pos0 = new Vector3(40.5169983f, 40.8129997f, -23.4892082f);
     private Vector3 pos1 = new Vector3(39.8785629f, 40.8110008f, -12.7832661f);
     private Vector3 pos2 = new Vector3(47.2845917f, 40.8160019f, -33.3429985f);
-    private Vector3 pos3 = new Vector3(-2.40700006f, 1.26400006f, -41.2000732f);
+    private Vector3 pos3 = new Vector3(66.1060028f, 35.7799988f, -5.10437822f);
 
     [SerializeField] 
     private Button printButton;

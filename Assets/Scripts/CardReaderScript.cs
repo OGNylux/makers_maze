@@ -5,9 +5,11 @@ public class CardReaderScript : MonoBehaviour
 {
     public GameObject cardReaderLight;
     public GameObject door;
+    public GameObject robot;
 
     public Color activeColor;
     public bool active = false;
+    private bool robotMoved = false;
 
     void Start()
     {
