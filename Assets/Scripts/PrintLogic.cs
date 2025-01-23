@@ -25,6 +25,12 @@ public class PrintLogic : MonoBehaviour
     private Vector3 pos2 = new Vector3(47.2845917f, 40.8160019f, -33.3429985f);
     private Vector3 pos3 = new Vector3(66.1060028f, 35.7799988f, -5.10437822f);
 
+    private float scaleX = 0.5f;
+    private float scaleY = 0.5f;
+    private float scaleZ = 0.5f;
+    private int filamentIDcopy = 0;
+    private int printIDcopy = 0;
+
     [SerializeField] 
     private Button printButton;
 
@@ -80,6 +86,11 @@ public class PrintLogic : MonoBehaviour
     // Print Objects with a delay
     public void createObjectWithDelay(float delay)
     {
+        scaleX = transform.localScale.x;
+        scaleY = transform.localScale.y;
+        scaleZ = transform.localScale.z;
+        filamentIDcopy = filamentID;
+        printIDcopy = printID;
         StartCoroutine(DelayedCreateObject(delay));
     }
 
@@ -138,15 +149,15 @@ public class PrintLogic : MonoBehaviour
         else if (printerID == 1) location = pos1;
         else if (printerID == 2) location = pos2;
         else if (printerID == 3) location = pos3;
-        GameObject newPrintObject = Instantiate(prints[(filamentID * shapesNum) + printID], location, Quaternion.identity); // Create new object
+        GameObject newPrintObject = Instantiate(prints[(filamentIDcopy * shapesNum) + printIDcopy], location, Quaternion.identity); // Create new object
 
         GameObject child = newPrintObject.transform.Find("Model").transform.gameObject;
 
         child.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
-        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetXScale(transform.localScale.x); // Set scale
-        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetYScale(transform.localScale.y); // Set scale
-        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetZScale(transform.localScale.z); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetXScale(scaleX); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetYScale(scaleY); // Set scale
+        child.transform.gameObject.GetComponent<ScaleOnPickup>().SetZScale(scaleZ); // Set scale
         printButton.interactable = true; // Enable print button
     }
 
